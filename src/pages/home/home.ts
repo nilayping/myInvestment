@@ -13,16 +13,11 @@ export class HomePage {
   constructor(public navCtrl: NavController, private service: InvestProvider) {
 
   }
-
-  getNews() {
+  ionViewDidEnter() {
     this.service.getNews()
       .subscribe(data => {
         this.news = Object.assign([], data['data']['list']);
         this.length = data['data']['pageSize'];
-        console.log(this.news);
-        for( let i=0; i<this.length; i++) {
-          console.log(this.news[i].title);
-        }
       });
   }
 }
