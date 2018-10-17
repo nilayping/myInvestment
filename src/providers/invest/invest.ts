@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 /*
@@ -14,7 +14,12 @@ export class InvestProvider {
     console.log('Hello InvestProvider Provider');
   }
 
-  getNews() { 
-    return this.http.get(this.newsUrl);
+  getNews(page?) {
+    if (!page) {
+      return this.http.get(this.newsUrl);
+    }
+    else {
+      return this.http.get(this.newsUrl, { params: new HttpParams().set('page', page) });
+    }
   }
 }

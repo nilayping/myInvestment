@@ -3,7 +3,6 @@
     <ion-title>Home</ion-title>
   </ion-navbar>
 </ion-header>
-
 <ion-content>
   <ion-list>
     <ion-item *ngFor="let n of news">
@@ -23,9 +22,13 @@
           <div class='note'>{{n.pv}}文章阅读量</div>
         </ion-col>
         <ion-col col-4>
-          <img src={{n.titleImageUrl}} />
+          <img class='newsPicture' src={{n.titleImageUrl}} />
         </ion-col>
       </ion-row>
     </ion-item>
   </ion-list>
+  <ion-infinite-scroll threshold=100px (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
