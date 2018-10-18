@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { InvestProvider } from './../../providers/invest/invest';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { NewsDetailPage } from '../news-detail/news-detail';
 
 @Component({
   selector: 'page-home',
@@ -26,15 +27,15 @@ export class HomePage {
 
   doInfinite(infiniteScroll) {
     this.currentPage++;
-    console.log('a')
     this.service.getNews(this.currentPage)
       .subscribe(data => {
         for(let i=0;i<(data['data']['list']).length;i++) {
           this.news.push(data['data']['list'][i])
         }
-        console.log(this.news);
-        console.log(data['data']['currentPage']);
         infiniteScroll.complete();
       })
+  }
+  itemTapped(id) {
+      this.navCtrl.push(NewsDetailPage, {id: id});
   }
 }

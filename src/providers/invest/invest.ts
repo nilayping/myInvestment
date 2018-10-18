@@ -10,6 +10,8 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class InvestProvider {
   private newsUrl = "https://rest.whale8.com/v3/news/list";
+  private detailUrl = "https://rest.whale8.com/v3/news/detail";
+
   constructor(public http: HttpClient) {
     console.log('Hello InvestProvider Provider');
   }
@@ -21,5 +23,13 @@ export class InvestProvider {
     else {
       return this.http.get(this.newsUrl, { params: new HttpParams().set('page', page) });
     }
+  }
+  getNewsDetail(id) {
+    return this.http.get(this.detailUrl, { params: new HttpParams()
+      .set('model', 'iphone')
+      .set('os', 'ios')
+      .set('version', 'abc') 
+      .set('id', id) 
+    });
   }
 }

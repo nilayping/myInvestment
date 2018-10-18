@@ -14,6 +14,7 @@ import { InvestProvider } from '../providers/invest/invest';
 
 
 import { HttpClientModule } from '@angular/common/http';
+import { NewsDetailPage } from '../pages/news-detail/news-detail';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { HttpClientModule } from '@angular/common/http';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    NewsDetailPage
   ],
   imports: [
     BrowserModule,
@@ -34,7 +36,8 @@ import { HttpClientModule } from '@angular/common/http';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    NewsDetailPage
   ],
   providers: [
     StatusBar,
