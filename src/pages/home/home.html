@@ -4,31 +4,76 @@
   </ion-navbar>
 </ion-header>
 <ion-content>
-  <ion-list>
-    <ion-item *ngFor="let n of news" (click)="itemTapped(n.id)" color="lighterdark" >   
-      <ion-row>
-        <ion-col col-8>
-          <ion-row>
-            <ion-col class='source'>
-              <p class='note'>{{n.source}}</p>
-            </ion-col>
-            <ion-col>
-              <p displayFormat="MM/DD/YYYY" class="note">{{n.newsTime|date}}</p>
-            </ion-col>
-          </ion-row>
-          <p text-wrap>
-            {{n.title}}
-          </p>
-          <div class='note'>{{n.pv}}文章阅读量</div>
+  <ion-item>
+    <ion-row>
+      <ion-col>
+        Popular investors
+      </ion-col>
+      <ion-col>
+        <button ion-button clear small text-right color="dark">See All</button>
+      </ion-col>
+    </ion-row>
+    <ion-scroll scrollX="true" direction="x">
+      <div class="inner">
+        <ion-col *ngFor="let investor of investors">
+          <ion-card>
+            <ion-row>
+              <ion-col>
+                <div>
+                  {{investor.name}}
+                </div>
+                <img src={{investor.photoUrl}}>
+              </ion-col>
+              <ion-col>
+                <p>持仓</p>
+                <div>
+                  <ul class="holds" *ngFor="let hold of investor.primaryHoldings">
+                    <li>
+                      <ion-row>
+                        <ion-col>{{hold.symbol}}</ion-col>
+                        <ion-col> {{hold.percent}}</ion-col>
+                      </ion-row>
+                    </li>
+                  </ul>
+                </div>
+              </ion-col>
+            </ion-row>
+
+          </ion-card>
+
         </ion-col>
-        <ion-col col-4>
-          <img class='newsPicture' src={{n.titleImageUrl}} />
-        </ion-col>
-      </ion-row>
-    </ion-item>
-  </ion-list>
-  <ion-infinite-scroll threshold=100px (ionInfinite)="doInfinite($event)">
-    <ion-infinite-scroll-content loadingSpinner="bubbles">
-    </ion-infinite-scroll-content>
-  </ion-infinite-scroll>
+      </div>
+    </ion-scroll>
+  </ion-item>
+
+
+  <div class="news">
+    <ion-list>
+      <ion-item *ngFor="let n of news" (click)="itemTapped(n.id)" color="lighterdark">
+        <ion-row>
+          <ion-col col-8>
+            <ion-row>
+              <ion-col class='source'>
+                <p class='note'>{{n.source}}</p>
+              </ion-col>
+              <ion-col>
+                <p displayFormat="MM/DD/YYYY" class="note">{{n.newsTime|date}}</p>
+              </ion-col>
+            </ion-row>
+            <p text-wrap>
+              {{n.title}}
+            </p>
+            <div class='note'>{{n.pv}}文章阅读量</div>
+          </ion-col>
+          <ion-col col-4>
+            <img class='newsPicture' src={{n.titleImageUrl}} />
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </ion-list>
+    <ion-infinite-scroll threshold=100px (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
 </ion-content>

@@ -6,4 +6,31 @@ page-home {
 .source{
     padding-left:0px;
 }
+ion-scroll {
+    white-space: nowrap;
+    height: 130px;
+    .inner{
+        width:2000px;
+        height: 100%;
+        display: inline-block;
+        position: relative;
+    
+    ion-card{
+        min-height: 160px; 
+        height: 100px;
+        width: 150px !important;
+        display: inline-block;
+            .scroll-content {
+            padding: 0px !important;
+        }    
+        ion-col{
+            flex: 0 0 50%;
+            max-width: 60%;
+        }
+        .holds{
+            list-style-type: none;
+        }
+    }
+}
+}
 }
