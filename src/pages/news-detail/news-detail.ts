@@ -16,21 +16,18 @@ import { InvestProvider } from '../../providers/invest/invest';
 })
 
 export class NewsDetailPage {
-  id;
-  selectPage;
+  id: any;  //Id of one news page.
+  selectPage = null; 
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private service: InvestProvider) {
     this.id = navParams.get('id')
   }
 
+  /* When app is open sent request to get data from the server */
   ionViewDidLoad() {
-    console.log('ionViewDidLoad NewsDetailPage');
-    console.log(this.id);
-    this.service.getNewsDetail(this.id)
+    this.service.getDetail(this.id)
       .subscribe(data => {
         this.selectPage = data['data'];
-        console.log(this.selectPage);
       })
   }
-
-
 }

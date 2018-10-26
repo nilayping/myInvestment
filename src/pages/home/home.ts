@@ -3,34 +3,34 @@ import { NavController } from 'ionic-angular';
 import { InvestProvider } from './../../providers/invest/invest';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { NewsDetailPage } from '../news-detail/news-detail';
+import { InvestorDetailPage } from '../investor-detail/investor-detail';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
-  news;
-  length;
-  currentPage = 0;
+  news = [];  //News list.
+  currentPage = 0; //The page of news list.
   loading = false;
-  investors;
-  holdings;
-  constructor(public navCtrl: NavController, private service: InvestProvider) {
+  investors = []; //investors list.
 
+  constructor(public navCtrl: NavController, private service: InvestProvider) {
   }
+
   ionViewDidEnter() {
     this.service.getNews()
       .subscribe(data => {
         this.news = data['data']['list'];
         this.currentPage = data['data']['currentPage'];
       });
-    this.service.getInvesters()
+    this.service.getInvestors()
       .subscribe(data => {
         this.investors = data["data"]['list'];
-       console.log(this.investors[1].primaryHoldings[1])
       });
   }
 
+  /* Send request to get data from the server.*/
   doInfinite(infiniteScroll) {
     this.currentPage++;
     this.service.getNews(this.currentPage)
@@ -41,7 +41,13 @@ export class HomePage {
         infiniteScroll.complete();
       })
   }
+
+  /* When user select news or investor, redirect user to the detail page */
   itemTapped(id) {
-    this.navCtrl.push(NewsDetailPage, { id: id });
+    if (id > 100) {
+      this.navCtrl.push(NewsDetailPage, { id: id });
+    } else {
+      this.navCtrl.push(InvestorDetailPage, { id: id });
+    }
   }
 }
